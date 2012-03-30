@@ -1,0 +1,69 @@
+---
+title:       Forms
+filter:
+  - erb
+---
+    <h2>Forms</h2> 
+    
+    <aside>
+      <label>Percentage Complete</label>
+      <progress min="0" max="100" value="50"></progress>
+    </aside>
+
+    <div id="showLocalStorage" style="display: none;">
+      <h3>Previous Entry</h3>
+    </div>
+
+    <form action="forms.html" method="post" id="info_form">
+      <fieldset>
+        <p><label>Name: <input type=tel name="profile_name" autofocus></label></p>
+        <p><label>Telephone: <input type=tel name="profile_phone"></label></p>
+        <p><label>Website: <input type=url name="profile_url" placeholder="http://www.markmcspadden.net"></label></p>
+        <p><label>E-mail address: <input type=email name="profile_email" required></label></p>
+      </fieldset>
+      <fieldset>
+        <p><label>Birthdate: <input type=date name="profile_birthdate" placeholder="1981-12-30"></label></p>
+        <p><label>Favorite time of day: <input type=time name="profile_fav_time" min="11:00" max="21:00" step="60"></label></p>
+        <p><label>Date and Time of last Tweet: <input type=datetime name="profile_last_tweet_date_time" min="11:00" max="21:00" step="900"></label></p>
+      </fieldset>
+      <fieldset>
+        <p><label>Number of Hours worked per week: <input type=number name="profile_hrs_worked" min="10" max="70" step="5" ></label></p>
+        <p>
+          <label>How engaged are you at work?:<br/>
+            NOT VERY<input type=range name="profile_work_engagement" min="0" max="100" step="20" />VERY
+          </label>
+        </p>
+        <p><label>Favorite Color: <input type=color name="profile_fav_color" placeholder="red, green, blue"></label></p>
+      </fieldset>
+      <p>
+        <button>Save</button>
+      </p>
+    </form>
+
+    <script type="text/javascript">
+      function storeFormLocally() {
+        var inputs = this.getElementsByTagName("input");
+        for(i=0; i < inputs.length; i++) { 
+          localStorage.setItem(inputs[i].name, inputs[i].value); 
+        }
+      }
+
+      var info_form = document.getElementById("info_form");
+      info_form.addEventListener("submit", storeFormLocally, false);
+
+      function displayLocalStorage() {
+        var container = document.getElementById("showLocalStorage");
+        var inputs = info_form.getElementsByTagName("input");
+
+        for(i=0; i < inputs.length; i++) { 
+          var name = inputs[i].name;
+          var value = localStorage.getItem(name); 
+          container.innerHTML += "" + name + " - " + value + "<br/>";
+        }
+        container.removeAttribute("style");
+      }
+
+      if(localStorage.length > 1) {
+        displayLocalStorage();
+      }
+    </script>

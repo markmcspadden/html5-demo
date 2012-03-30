@@ -1,0 +1,17 @@
+---
+title:       Local Storage
+filter:
+  - erb
+---
+
+<div id="showLocalStorage">
+  <h3>Local Storage</h3>
+</div>
+
+<script type="text/javascript">
+  for (var i = 0; i < localStorage.length; i++){
+    var container = document.getElementById("showLocalStorage"); 
+    var key = localStorage.key(i);
+    container.innerHTML += key + " - " + localStorage.getItem(key) + "<br/>";
+  }
+</script>

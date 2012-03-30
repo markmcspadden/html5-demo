@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>HTML5</title>
+    <link rel="stylesheet" type="text/css" href="/css/html5.css">
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to HTML5</h1>
+    </header>
+
+    <nav>
+      <form action="/" method="get">
+        <input type=search name="search" results="10" placeholder="search this site">
+      </input>
+      </form>
+
+      <ul>
+        <li><a href="/index.html" class="nav">Home</a></li>
+        <li><a href="/semantics.html">Semantics</a></li>
+        <li><a href="/css3.html">CSS3</a></li>
+        <li><a href="/local_storage.html">Local Storage</a></li>
+        <li><a href="/geo.html">Geolocation</a></li>
+        <li><a href="/comm.html">Client/Server Comm</a></li>
+      </ul>
+    </nav>
+
+
+    <div id="main">
+      <h2>Geolocation</h2>
+<div id="errors">
+</div>
+<p>
+  Lat: <span id="lat"></span><br/>
+  Lng: <span id="lng"></span><br/>
+  Altitude: <span id="altitude"></span><br/>
+  Speed (meters/second): <span id="speed"></span><br/>
+  Heading (degrees clockwise from due north): <span id="heading"></span>
+</p>
+<p>
+  Accuracy (in meters): <span id="acc"></span><br/>
+  Altitude Accuracy (in meters): <span id="altAcc"></span><br/>
+  Updated At: <span id="updated_at"></span>
+</p>
+
+<a id="geo_now" href="#">Get My Location Right Now</a><br/><br/>
+<a id="geo_watch" href="#">Watch my Position</a><br/>
+<a id="geo_stopwatch" href="#">Stop Watching my Position</a><br/>
+
+
+<script>
+    var geoWatchId = "";
+
+    function displayPosition(position) {
+      alert('Getting and displaying Geolocation');
+      document.getElementById("lat").innerHTML = position.coords.latitude;
+      document.getElementById("lng").innerHTML = position.coords.longitude;
+      document.getElementById("altitude").innerHTML = position.coords.altitude;
+      document.getElementById("speed").innerHTML = position.coords.speed;
+      document.getElementById("heading").innerHTML = position.coords.heading;
+      document.getElementById("acc").innerHTML = position.coords.accuracy;
+      document.getElementById("altAcc").innerHTML = position.coords.altitudeAccuracy;
+      document.getElementById("updated_at").innerHTML = position.timestamp;
+    }
+
+    function displayError(error) {
+      document.getElementById("errors").innerHTML = error;
+    }
+
+    function currentPosition() {
+      navigator.geolocation.getCurrentPosition(displayPosition);
+    }
+
+    function monitorPosition() {
+      geoWatchId = navigator.geolocation.watchPosition(displayPosition, displayError, {enableHighAccuracy:true });
+    }
+
+    var geoNow = document.getElementById("geo_now");
+    var geoWatch = document.getElementById("geo_watch");
+    var geoStopWatch = document.getElementById("geo_stopwatch");
+    
+    geoNow.addEventListener("click", currentPosition, false);
+    geoWatch.addEventListener("click", monitorPosition, false);
+    geoStopWatch.addEventListener("click", function(){
+      navigator.geolocation.clearWatch(geoWatchId);
+    }, false);
+</script>
+    </div>
+
+    <footer>
+      Built with love, care, and caffiene by Mark McSpadden
+    </footer>
+  </body>
+</html>
