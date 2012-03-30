@@ -5,11 +5,7 @@ DIR = 'public'
 set :public, DIR
 
 get '/' do
-  read('index.html')
-end
-
-def read(*parts)
-  File.read(File.join([ DIR ] + parts))
+  redirect "/index.html"
 end
 
 run Sinatra::Application
