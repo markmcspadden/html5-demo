@@ -175,12 +175,18 @@ footer {
 }
 
 @media only screen and (max-device-width: 480px) {
+  body {
+    width: 320px;
+  }
   nav {
-    background-color: white;
+    background: white;
   }
   nav ul li {
     display: block;
     float: none;
     margin: 2px;
+  }
+  input[type='search'] {
+    display: none;
   }
 }
