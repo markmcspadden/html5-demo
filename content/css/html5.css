@@ -178,3 +178,14 @@ footer {
 #logo {
   height: 120px;
 }
+
+@media only screen and (max-device-width: 480px) {
+  nav {
+    background-color: white;
+  }
+  nav ul li {
+    display: block;
+    float: none;
+    margin: 2px;
+  }
+}
