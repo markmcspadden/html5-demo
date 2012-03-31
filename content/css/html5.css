@@ -183,9 +183,6 @@ footer {
   body {
     width: 320px;
   }
-  nav {
-    background: white;
-  }
   nav ul li {
     border: 1px solid white;
     display: block;
